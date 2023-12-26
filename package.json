@@ -1,0 +1,16 @@
+{
+  "name": "dotguide-be",
+  "version": "1.0.0",
+  "description": "back end for dotGuide",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/JollyRen/dotguide-be.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
