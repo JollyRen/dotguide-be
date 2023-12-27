@@ -21,7 +21,7 @@ Need to really zero in on what your hooks are doing in your React project? Expla
 ## Future plans
 
 - GitHub integration and Auth
-- Google Auth
+<!-- - Google Auth -->
 - Import files directly
 - More comprehensive editing features
 - Jump to line in editor from an MD link
