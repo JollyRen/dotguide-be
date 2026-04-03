@@ -1,21 +1,14 @@
-import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite'
 import dotenv from 'dotenv'
 dotenv.config()
-// Follow this pattern to import other Firebase services
-// import { } from 'firebase/<service>';
+import { initializeApp, cert } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
+import cred from './serviceAccountKey.json' with { type: 'json' }
+// let cred = JSON.stringify(JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON))
+console.log(cred)
+const fbApp = initializeApp({
+  credential: cert(cred)
+})
 
-// TODO: Replace the following with your app's Firebase project configuration
-const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID
-}
+const db = getFirestore()
 
-export const app = initializeApp(firebaseConfig)
-export const db = getFirestore(app)
-
-// Get a list of cities from your database
+export { fbApp, db }
