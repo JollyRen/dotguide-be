@@ -22,3 +22,37 @@
  */
 
 import { db } from '../firebase.js'
+import { v7 } from 'uuid' //may use instead of firestore uuid
+
+const getPublicUser = () => {}
+
+const getAdminUser = () => {}
+
+const createProfile = ({ profileData }) => {
+  let { displayName, email } = profileData
+  displayName ? displayName : (displayName = email.slice(0, email.indexOf('@')))
+  displayName < 20 ? displayName : (displayName = displayName.slice(0, 20))
+  const newProfile = {
+    displayName,
+    email,
+    uid: v7(),
+    banned: false,
+    deleted: false,
+    warnings: [],
+    about: '',
+    firstName: '',
+    lastName: '',
+    createdAt: Date.now(),
+    organizations: [],
+    followers: [],
+    following: [],
+    bookmarks: [],
+    tags: []
+  }
+} // naming, email, defaults
+
+const editProfileAdmin = () => {} // ban, warn, admin changes
+
+const editProfileSelf = () => {} // email, naming, delete(soft), about
+
+const addTags = () => {}
