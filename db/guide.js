@@ -6,7 +6,7 @@
  * uid:             String (Auto gen)
  * userUid:         String (from FS/FB user)
  * isPublished:     boolean (default false)
- * published:       ISO Date UTC to Locale or Null
+ * published:       Int - ms to Locale or Null
  * favorites:       Array[UID<string> userUid]
  * description:     String (2000 char)
  * tags:            Array[UID<string> tag]
@@ -29,6 +29,7 @@ const getGuidesByUserId = async (userId) => {
       .where('published', '!=', null)
       .get()
     const guides = []
+
     _guides.forEach((doc) => {
       guides.push(doc.data())
     })
