@@ -24,11 +24,11 @@
 import { db } from '../firebase.js'
 import { v7 } from 'uuid' //may use instead of firestore uuid
 
-const getPublicUser = () => {}
+export const getPublicUser = () => {}
 
-const getAdminUser = () => {}
+export const getAdminUser = () => {}
 
-const createProfile = ({ profileData }) => {
+export const createProfile = async ({ profileData }) => {
   let { displayName, email } = profileData
   displayName ? displayName : (displayName = email.slice(0, email.indexOf('@')))
   displayName < 20 ? displayName : (displayName = displayName.slice(0, 20))
@@ -49,10 +49,18 @@ const createProfile = ({ profileData }) => {
     bookmarks: [],
     tags: []
   }
+  try {
+    let col = db.collection('profile')
+    let ps = await col.where('email', '==', email).get()
+    if (ps.empty) throw Error('email already exists')
+    col.doc(newProfile.uid).set(newProfile)
+  } catch (error) {
+    console.error(error)
+  }
 } // naming, email, defaults
 
-const editProfileAdmin = () => {} // ban, warn, admin changes
+export const editProfileAdmin = () => {} // ban, warn, admin changes
 
-const editProfileSelf = () => {} // email, naming, delete(soft), about
+export const editProfileSelf = () => {} // email, naming, delete(soft), about
 
-const addTags = () => {}
+export const addTagsSelf = () => {}

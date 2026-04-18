@@ -29,6 +29,7 @@ const getGuidesByUserId = async (userId) => {
       .where('published', '!=', null)
       .get()
     const guides = []
+
     _guides.forEach((doc) => {
       guides.push(doc.data())
     })
